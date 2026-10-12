@@ -1,0 +1,180 @@
+/**
+ * ==============================================================================
+ * DESIGN SYSTEM & ROOT TOKENS - SISTEMA DE CHAMADOS IFRN
+ * Inspirado na identidade visual do SUAP (IFRN Pau dos Ferros)
+ * ==============================================================================
+ * Este arquivo define todas as variáveis CSS (design tokens) necessárias para
+ * padronizar cores, tipografia, espaçamentos, sombras e bordas do projeto.
+ * 
+ * Estrutura recomendada de layout:
+ * - Cabeçalho: position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+ * - Conteúdo principal: padding-top: calc(var(--header-height) + var(--space-6));
+ * ==============================================================================
+ */
+
+:root {
+  /* ============================================================================
+   * 1. CORES DA MARCA (SUAP / IFRN)
+   * Uso: Elementos institucionais, cabeçalho fixo, barras de destaque.
+   * ============================================================================ */
+  --color-brand-primary: #1b4338;       /* Verde institucional escuro: usado no cabeçalho fixo principal */
+  --color-brand-primary-hover: #14332a; /* Tom mais escuro: hover de itens no cabeçalho institucional */
+  --color-brand-primary-light: #276455; /* Verde médio: detalhes, acentos e bordas ativas de menu */
+  --color-brand-surface: #e8f2ec;       /* Verde muito suave: fundos de destaque suave ou avatares */
+
+  /* ============================================================================
+   * 2. CORES DE AÇÃO (BOTÕES PRINCIPAIS E CTAs)
+   * Uso: Botão de ação primária "+ Abrir chamado", salvar formulários.
+   * ============================================================================ */
+  --color-action-primary: #15ab37;      /* Verde SUAP de ação: botão principal "+ Abrir chamado" e "Salvar" */
+  --color-action-hover: #128f2e;        /* Verde ação hover: estado hover do botão principal */
+  --color-action-active: #0e6e24;       /* Verde ação active: clique do botão principal */
+  --color-action-text: #ffffff;         /* Texto sobre botões primários */
+
+  /* ============================================================================
+   * 3. SUPERFÍCIES E FUNDOS (BACKGROUNDS)
+   * Uso: Fundo geral da página, superfícies de cards, inputs e modais.
+   * ============================================================================ */
+  --bg-canvas: #e0e9e3;                 /* Cinza esverdeado característico do SUAP: fundo de toda a página (body) */
+  --bg-surface: #ffffff;                /* Branco puro: fundo dos cards de chamados, modais e containers */
+  --bg-surface-subtle: #f8fafc;         /* Cinza suave: cabeçalho de tabelas, seções secundárias dentro do card */
+  --bg-input: #ffffff;                  /* Fundo dos campos de busca, selects e formulários */
+  --bg-input-disabled: #f1f5f9;         /* Fundo de campos desabilitados (ex: chamado já resolvido) */
+
+  /* ============================================================================
+   * 4. TIPOGRAFIA E CORES DE TEXTO
+   * Uso: Hierarquia de títulos, corpo de texto, rótulos e metadados.
+   * ============================================================================ */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Tamanhos de Fonte */
+  --font-size-xs: 0.75rem;              /* 12px: tags/badges de status, data de criação, IDs de chamados */
+  --font-size-sm: 0.875rem;             /* 14px: metadados secundários, filtros, labels de formulário, inputs */
+  --font-size-base: 1rem;               /* 16px: texto padrão de leitura, descrições breves, botões */
+  --font-size-lg: 1.125rem;             /* 18px: subtítulos, título de card de chamado individual */
+  --font-size-xl: 1.25rem;              /* 20px: título da seção ("Chamados", "Detalhes do Chamado") */
+  --font-size-2xl: 1.5rem;              /* 24px: boas-vindas ("Olá, [Nome]") e títulos de formulário */
+  --font-size-3xl: 1.875rem;            /* 30px: título de impacto ou logotipo textual */
+
+  /* Pesos de Fonte */
+  --font-weight-regular: 400;           /* Textos corridos e descrições */
+  --font-weight-medium: 500;            /* Labels, opções de select e metadados com ênfase */
+  --font-weight-semibold: 600;          /* Títulos de cards, botões e status badges */
+  --font-weight-bold: 700;              /* Cabeçalhos principais e boas-vindas */
+
+  /* Cores de Texto */
+  --text-primary: #1e293b;              /* Texto principal com alto contraste: títulos, nomes e dados principais */
+  --text-secondary: #435368;            /* Texto de apoio: descrições de chamados, filtros e labels */
+  --text-muted: #64748b;                /* Metadados neutros: datas, placeholders e IDs secundários */
+  --text-inverse: #ffffff;              /* Texto claro: usado sobre o cabeçalho verde institucional e botões */
+
+  /* ============================================================================
+   * 5. ESTADOS DE CHAMADOS (STATUS WORKFLOW)
+   * Uso: Badges e indicadores das 3 etapas da API (aberto -> em andamento -> resolvido)
+   * ============================================================================ */
+  /* Status: ABERTO (Aguardando atendimento) */
+  --status-aberto-bg: #fef3c7;          /* Amarelo claro: fundo da tag quando o chamado está recém-aberto */
+  --status-aberto-text: #92400e;        /* Âmbar escuro: texto com alto contraste da tag aberto */
+  --status-aberto-border: #fde68a;      /* Borda sutil da tag aberto */
+
+  /* Status: EM ANDAMENTO (Técnico assumiu) */
+  --status-andamento-bg: #caeffb;       /* Azul claro SUAP: fundo da tag de atendimento em progresso */
+  --status-andamento-text: #0369a1;     /* Azul petróleo: texto com contraste da tag em andamento */
+  --status-andamento-border: #aee7f9;   /* Borda sutil da tag em andamento */
+
+  /* Status: RESOLVIDO (Finalizado) */
+  --status-resolvido-bg: #e9f6d8;       /* Verde claro SUAP: fundo da tag quando o problema foi resolvido */
+  --status-resolvido-text: #166534;     /* Verde floresta: texto com alto contraste da tag resolvido */
+  --status-resolvido-border: #c9eab0;   /* Borda sutil da tag resolvido */
+
+  /* ============================================================================
+   * 6. PRIORIDADES (ALTA / MÉDIA / BAIXA)
+   * Uso: Chips e etiquetas de nível de criticidade do chamado.
+   * ============================================================================ */
+  /* Prioridade: ALTA */
+  --priority-alta-bg: #ffd1d1;          /* Vermelho suave: fundo da prioridade alta */
+  --priority-alta-text: #991b1b;        /* Vermelho escuro: texto de alerta para prioridade alta */
+  --priority-alta-border: #ffbabc;      /* Borda sutil da prioridade alta */
+
+  /* Prioridade: MÉDIA */
+  --priority-media-bg: #ffedd5;         /* Laranja claro: fundo da prioridade média */
+  --priority-media-text: #9a3412;       /* Laranja escuro: texto da prioridade média */
+  --priority-media-border: #fed7aa;     /* Borda da prioridade média */
+
+  /* Prioridade: BAIXA */
+  --priority-baixa-bg: #f1f5f9;         /* Cinza neutro suave: fundo da prioridade baixa */
+  --priority-baixa-text: #475569;       /* Grafite: texto neutro para baixa prioridade */
+  --priority-baixa-border: #e2e8f0;     /* Borda da prioridade baixa */
+
+  /* ============================================================================
+   * 7. ESTADOS DO SISTEMA E FEEDBACK (MENSAGENS, ERROS E MODAL)
+   * Uso: Banners de aviso, mensagens de erro da API, estados de tela vazia e exclusão.
+   * ============================================================================ */
+  --state-danger-bg: #fee2e2;           /* Fundo para banners de erro e confirmação de exclusão */
+  --state-danger-text: #991b1b;         /* Texto de mensagens de erro 400/401/404/422 */
+  --state-danger-border: #fca5a5;       /* Borda de campos ou caixas com erro */
+  --btn-danger: #dc2626;                /* Botão vermelho destrutivo: "Excluir chamado" */
+  --btn-danger-hover: #b91c1c;          /* Hover do botão excluir */
+
+  /* ============================================================================
+   * 8. BORDAS E DIVISORES
+   * Uso: Separação de linhas, contorno de inputs e cartões.
+   * ============================================================================ */
+  --border-subtle: #dce5df;             /* Linhas muito sutis dentro de cards e separadores */
+  --border-default: #c2d4c9;            /* Contorno padrão de inputs, selects e cards */
+  --border-focus: #15ab37;              /* Cor da borda/outline ao focar em inputs e botões */
+
+  /* Raios de Arredondamento (Border Radius) */
+  --radius-xs: 4px;                     /* Tags pequenas, badges de prioridade, botões compactos */
+  --radius-sm: 6px;                     /* Inputs, selects, botões normais */
+  --radius-md: 10px;                    /* Cards de chamados, modais de diálogo */
+  --radius-lg: 16px;                    /* Containers grandes, caixas de destaque */
+  --radius-full: 9999px;                /* Badges circulares, avatares e pílulas de filtro */
+
+  /* ============================================================================
+   * 9. SOMBRAS (BOX SHADOWS)
+   * Uso: Elevação de elementos na interface criando profundidade visual.
+   * ============================================================================ */
+  --shadow-header: 0 2px 8px rgba(16, 23, 18, 0.12); /* Sombra suave sob o cabeçalho fixo no topo */
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04); /* Sombra padrão dos cards */
+  --shadow-card-hover: 0 8px 16px rgba(27, 67, 56, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06); /* Hover suave */
+  --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Menus select */
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Modais */
+
+  /* ============================================================================
+   * 10. ESPAÇAMENTOS (ESCALA BASE 4px)
+   * Uso: Padding interno, margins, gaps de grid e flexbox.
+   * ============================================================================ */
+  --space-1: 0.25rem;  /* 4px  - Espaçamentos mínimos (ícone + texto) */
+  --space-2: 0.5rem;   /* 8px  - Padding interno de badges e gaps pequenos */
+  --space-3: 0.75rem;  /* 12px - Padding interno de inputs e botões */
+  --space-4: 1rem;     /* 16px - Espaço padrão entre elementos, padding de cards */
+  --space-5: 1.25rem;  /* 20px - Padding generoso de cards e formulários */
+  --space-6: 1.5rem;   /* 24px - Margens de seções e gaps de grid de cards */
+  --space-8: 2rem;     /* 32px - Separação entre barra de filtros e lista de chamados */
+  --space-10: 2.5rem;  /* 40px - Margem superior do conteúdo da página */
+  --space-12: 3rem;    /* 48px - Espaçamentos de rodapé e topo */
+
+  /* ============================================================================
+   * 11. DIMENSÕES E CAMADAS (LAYOUT & Z-INDEX)
+   * Uso: Controle de sobreposição e alturas fixas.
+   * ============================================================================ */
+  --header-height: 64px;                /* Altura fixa padrão do cabeçalho */
+  --container-max-width: 1240px;        /* Largura máxima centralizada do conteúdo da página */
+
+  --z-base: 1;                          /* Conteúdo normal */
+  --z-card: 10;                         /* Cards e elementos interativos */
+  --z-header: 100;                      /* Cabeçalho fixo no topo da tela */
+  --z-modal-backdrop: 200;              /* Fundo escurecido da confirmação de exclusão */
+  --z-modal: 210;                       /* Janela modal de confirmação */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-base);
+}
