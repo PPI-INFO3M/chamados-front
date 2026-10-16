@@ -6,9 +6,11 @@ import Cadastro from './pages/Cadastro'
 import api from "./services/api"
 import Cabecalho from "./components/Cabecalho"
 import './App.css'
+import { listarChamados } from './services/chamadosService'
 
 function App() {
   const [usuario, setUsuario] = useState(null);
+  const [chamados, setChamados] = useState(null);
 
   async function carregarUsuario() {
     try {
@@ -19,9 +21,19 @@ function App() {
     }
   };
 
+  async function carregarChamados() {
+    try {
+      const dados = await listarChamados();
+      setChamados(dados)
+    } catch (e) {
+      s
+    }
+  }
+
 
   useEffect (() => {
     carregarUsuario();
+    carregarChamados();
   }, []);
 
 
@@ -29,7 +41,7 @@ function App() {
     <div>
       <Cabecalho user={usuario} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home chamados={chamados} />} />
         <Route path="/chamado/:id" element={<Detalhe />} />
         <Route path="/novo" element={<Cadastro />} />
         <Route path="/editar/:id" element={<Cadastro />} />

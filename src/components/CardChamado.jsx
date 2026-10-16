@@ -13,4 +13,4 @@ function CardChamado(props) {
     )
 }
 
-export default CardChamado/
+export default CardChamado

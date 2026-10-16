@@ -1,6 +1,11 @@
-import { listarChamados } from "../services/chamadosService"
+import ListaChamados from "../components/ListaChamados"
 
-function Home() {
+function Home(props) {
+    return (
+        <div>
+            <ListaChamados chamados={props.chamados} />
+        </div>
+    )
 
 }
 
