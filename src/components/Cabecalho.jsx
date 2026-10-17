@@ -10,7 +10,7 @@ function Cabecalho(props) {
 
             <nav className="menu">
                 <Link to="/">Inicio</Link>
-                <Link to="/novo">Novo chamado</Link>
+                <Link to="/novo-chamado">Novo chamado</Link>
             </nav>
 
             <div className="menu-user">

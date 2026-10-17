@@ -1,5 +1,6 @@
 import api from './api'
 
+/* GET */
 export async function buscarUsuario() {
     const resposta = await api.get("/eu");
     return resposta.data;
@@ -15,6 +16,7 @@ export async function buscarChamado(id) {
     return resposta.data;
 }
 
+/* POST */
 export async function criarChamado(chamado) {
     const resposta = await api.post("/chamados", chamado);
     return resposta.data;

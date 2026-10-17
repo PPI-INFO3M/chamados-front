@@ -6,44 +6,61 @@ import Cadastro from './pages/Cadastro'
 import api from "./services/api"
 import Cabecalho from "./components/Cabecalho"
 import './App.css'
+
 import { listarChamados } from './services/chamadosService'
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
-  const [chamados, setChamados] = useState(null);
+  const [usuario, setUsuario] = useState([]);
+  const [chamados, setChamados] = useState([]);
+  const [erro, setErro] = useState(null)
+
+  const [busca, setBusca] = useState("")
 
   async function carregarUsuario() {
     try {
       const resposta = await api.get("/eu")
       setUsuario(resposta.data)
-    } catch (erro) {
-      console.log("Erro: ", erro)
+    } catch (e) {
+      setErro("Erro")
     }
   };
 
   async function carregarChamados() {
     try {
-      const dados = await listarChamados();
+      const filtros = {}
+      if (busca) {
+        filtros.busca = busca
+      }
+      const dados = await listarChamados(filtros);
       setChamados(dados)
     } catch (e) {
-      s
+      setErro("Erro")
     }
   }
 
 
   useEffect (() => {
     carregarUsuario();
-    carregarChamados();
   }, []);
+
+  useEffect (() => {
+    const temporizador = setTimeout(() => {
+      carregarChamados()
+    }, 500)
+
+    return (() => {
+      clearTimeout(temporizador)
+    })
+  }, [busca]);
 
 
   return (
     <div>
       <Cabecalho user={usuario} />
       <Routes>
-        <Route path="/" element={<Home chamados={chamados} />} />
+        <Route path="/" element={<Home chamados={chamados} busca={busca} setBusca={setBusca} />} />
         <Route path="/chamado/:id" element={<Detalhe />} />
-        <Route path="/novo" element={<Cadastro />} />
+        <Route path="/novo-chamado" element={<Cadastro />} />
         <Route path="/editar/:id" element={<Cadastro />} />
       </Routes>
 

@@ -2,6 +2,8 @@ import { use, useEffect, useState } from "react"
 import CampoTexto from "./CampoTexto"
 import { listarTipos, listarLocais, listarPrioridades } from "../services/chamadosService"
 
+
+
 function Formulario(props) {
     const [titulo, setTitulo] = useState("")
     const [descricao, setDescricao] = useState("")
@@ -14,8 +16,9 @@ function Formulario(props) {
     const [locais, setLocais] = useState([]);
     const [prioridades, setPrioridades] = useState([]);
 
+
     useEffect(() => {
-        async function CarregarListas() {
+        async function carregarListas() {
             try {
                 setTipos(await listarTipos())
                 setLocais(await listarLocais())
@@ -24,7 +27,7 @@ function Formulario(props) {
                 console.log("Erro:", e)
             }
         }
-        CarregarListas()
+        carregarListas()
     }, []);
 
     function aoEnviar(e) {
