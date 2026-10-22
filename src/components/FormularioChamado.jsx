@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import CampoTexto from "./CampoTexto"
 import { listarTipos, listarLocais, listarPrioridades } from "../services/chamadosService"
 

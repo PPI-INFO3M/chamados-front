@@ -1,36 +1,13 @@
 import ListaChamados from "../components/ListaChamados"
 import { Link } from "react-router-dom"
 
-import { listarTipos, listarLocais, listarPrioridades } from "../services/chamadosService"
-import {  CarregarListas } from "../components/FormularioChamado"
-import { useEffect, useState } from "react"
-
 function Home(props) {
-    const [status, setStatus] = useState([])
-    const [tipos, setTipos] = useState([])
-    const [locais, setLocais] = useState([])
-    const [prioridades, setPrioridades] = useState([])
-
-    const [erro, setErro] = useState(null)
-
-    useEffect(() => {
-        async function CarregarListas() {
-            try {
-                setTipos(await listarTipos())
-                setLocais(await listarLocais)
-                setPrioridades(await listarPrioridades())
-            } catch (e) {
-                setErro("Erro")
-            }
-        };
-        CarregarListas()
-    }, [])
 
     return (
         <div className="page-home">
             <div className="ctn-top">
                 <h2>Chamados</h2>
-                <Link to="/novo-chamado">+ Abrir chamado</Link>
+                <Link to="/novo">+ Abrir chamado</Link>
             </div>
             <div className="ctn-busca">
                 <input 
@@ -42,12 +19,26 @@ function Home(props) {
                     }}
                 />
 
-                <select>
-                    <option value="">Status</option>
+                <select
+                    value={props.filtroTipo}
+                    onChange={(e) => {
+                        props.setFiltroTipo(e.target.value)
+                    }}>
+                        <option value="">Tipos</option>
+                        {props.tipos.map((item) => (
+                            <option key={item} value={item}>{item}</option>
+                        ))}
                 </select>
-                <select>
-                    <option value="">Tipo</option>
-                </select>
+                <select
+                    value={props.status}
+                    onChange={(e) => {
+                        props.setStatus(e.target.value)
+                    }}>
+                        <option value="">Status</option>
+                        {props.status.map((statu) => (
+                            <option key={statu} value={statu}>{statu}</option>
+                        ))}
+                    </select>
 
                 
             </div>
