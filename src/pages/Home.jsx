@@ -34,16 +34,36 @@ function Home(props) {
                     onChange={(e) => {
                         props.setStatus(e.target.value)
                     }}>
-                        <option value="">Status</option>
-                        {props.status.map((statu) => (
-                            <option key={statu} value={statu}>{statu}</option>
+                        <option value="Status" key="status">Status</option>
+                        <option value="aberto" key="aberto">aberto</option>
+                        <option key="em-andamento" value="em andamento">em andamento</option>
+                        <option key="" value="resolvido">resolvido</option>
+                </select>
+                <select
+                    value={props.filtroLocal}
+                    onChange={(e) => {
+                        props.setFiltroLocal(e.target.value)
+                    }}>
+                    <option value="">Local</option>
+                    {props.locais.map((local) => (
+                        <option key={local} value={local}>{local}</option>
+                    ))}
+                </select>
+                <select
+                    value={props.filtroPrioridade}
+                    onChange={(e) => {
+                        props.setFiltroPrioridade(e.target.value)
+                    }}>
+                        <option value="">Prioridade</option>
+                        {props.prioridades.map((prioridade) => (
+                            <option key={prioridade} value={prioridade}>{prioridade}</option>
                         ))}
                     </select>
 
                 
             </div>
 
-            <ListaChamados chamados={props.chamados} />
+            <ListaChamados chamados={props.chamados} carregando={props.carregando} />
         </div>
     )
 
