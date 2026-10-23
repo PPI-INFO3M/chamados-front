@@ -4,7 +4,8 @@
  * Inspirado na identidade visual do SUAP (IFRN Pau dos Ferros)
  * ==============================================================================
  * Este arquivo define todas as variáveis CSS (design tokens) necessárias para
- * padronizar cores, tipografia, espaçamentos, sombras e bordas do projeto.
+ * padronizar cores, tipografia, espaçamentos, sombras, bordas, transições,
+ * transformações e animações do projeto.
  * 
  * Estrutura recomendada de layout:
  * - Cabeçalho: position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
@@ -137,8 +138,8 @@
    * Uso: Elevação de elementos na interface criando profundidade visual.
    * ============================================================================ */
   --shadow-header: 0 2px 8px rgba(16, 23, 18, 0.12); /* Sombra suave sob o cabeçalho fixo no topo */
-  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04); /* Sombra padrão dos cards */
-  --shadow-card-hover: 0 8px 16px rgba(27, 67, 56, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06); /* Hover suave */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04); /* Sombra padrão dos cards no SUAP */
+  --shadow-card-hover: 0 4px 12px rgba(27, 67, 56, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06); /* Hover suave com elevação */
   --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Menus select */
   --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Modais */
 
@@ -160,18 +161,133 @@
    * 11. DIMENSÕES E CAMADAS (LAYOUT & Z-INDEX)
    * Uso: Controle de sobreposição e alturas fixas.
    * ============================================================================ */
-  --header-height: 64px;                /* Altura fixa padrão do cabeçalho */
-  --container-max-width: 1240px;        /* Largura máxima centralizada do conteúdo da página */
+  --header-height: 56px;                /* Altura compacta institucional do cabeçalho SUAP */
+  --container-max-width: 1200px;        /* Largura máxima centralizada do conteúdo */
 
-  --z-base: 1;                          /* Conteúdo normal */
+  --z-base: 1;                          /* Conteúdo normal da página */
   --z-card: 10;                         /* Cards e elementos interativos */
   --z-header: 100;                      /* Cabeçalho fixo no topo da tela */
   --z-modal-backdrop: 200;              /* Fundo escurecido da confirmação de exclusão */
   --z-modal: 210;                       /* Janela modal de confirmação */
+
+  /* ============================================================================
+   * 12. TRANSIÇÕES DE TEMPO E CURVAS (TRANSITIONS & EASINGS)
+   * Uso: Suavização de mudanças de estado (hover, focus, active, modais, etc.)
+   * ============================================================================ */
+  /* Duração */
+  --transition-duration-fast: 150ms;    /* 150ms: feedback imediato (hover de botões, foco de inputs, cor de links) */
+  --transition-duration-normal: 250ms;  /* 250ms: transições perceptíveis (elevação de cards, abertura de filtros) */
+  --transition-duration-slow: 350ms;    /* 350ms: transições estruturais (entrada de modais, fade de tela, expansões) */
+
+  /* Curvas de Aceleração (Timing Functions) */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);  /* Padrão natural: recomendado para a maioria das transições */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);         /* Entrada desacelerada: ideal para modais surgindo ou tooltips */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);          /* Saída acelerada: elementos sumindo da tela */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);/* Leve repique: micro-interações como checkmarks e botões ativos */
+
+  /* Combinações Prontas de Transição */
+  --transition-colors: color var(--transition-duration-fast) var(--ease-standard),
+                       background-color var(--transition-duration-fast) var(--ease-standard),
+                       border-color var(--transition-duration-fast) var(--ease-standard);
+  --transition-card: transform var(--transition-duration-normal) var(--ease-standard),
+                     box-shadow var(--transition-duration-normal) var(--ease-standard);
+  --transition-all: all var(--transition-duration-normal) var(--ease-standard);
+
+  /* ============================================================================
+   * 13. TRANSFORMAÇÕES (TRANSFORMS)
+   * Uso: Efeitos de elevação, clique tátil, escala e feedback visual.
+   * ============================================================================ */
+  --transform-hover-lift: translateY(-2px);       /* Elevação suave do card no hover (combinar com --shadow-card-hover) */
+  --transform-hover-lift-subtle: translateY(-1px);/* Elevação muito sutil para botões e links */
+  --transform-press: scale(0.98);                 /* Feedback de clique tátil: botão sendo pressionado (:active) */
+  --transform-press-icon: scale(0.92);            /* Clique em ícones pequenos e botões de ação rápida */
+  --transform-badge-hover: scale(1.04);           /* Destaque sutil ao passar o cursor sobre tags de status/prioridade */
+  
+  /* Estados de Modal */
+  --transform-modal-initial: scale(0.95) translateY(10px); /* Posição inicial fora da vista do modal de confirmação */
+  --transform-modal-active: scale(1) translateY(0);        /* Posição final centralizada do modal de confirmação */
 }
+
+/* ==============================================================================
+ * GUIA DE APLICAÇÃO PRÁTICA DAS TRANSFORMAÇÕES E ANIMAÇÕES
+ * ==============================================================================
+ * Como aplicar os tokens nos seus componentes React / CSS puro:
+ *
+ * 1. CARDS DE CHAMADOS (Hover com elevação):
+ *    .card-chamado {
+ *      background-color: var(--bg-surface);
+ *      box-shadow: var(--shadow-card);
+ *      transition: var(--transition-card);
+ *      cursor: pointer;
+ *    }
+ *    .card-chamado:hover {
+ *      transform: var(--transform-hover-lift);
+ *      box-shadow: var(--shadow-card-hover);
+ *    }
+ *
+ * 2. BOTÕES DE AÇÃO (Hover de cor e clique tátil):
+ *    .btn-primary {
+ *      background-color: var(--color-action-primary);
+ *      transition: var(--transition-colors), transform var(--transition-duration-fast) var(--ease-standard);
+ *    }
+ *    .btn-primary:hover {
+ *      background-color: var(--color-action-hover);
+ *      transform: var(--transform-hover-lift-subtle);
+ *    }
+ *    .btn-primary:active {
+ *      transform: var(--transform-press);
+ *    }
+ *
+ * 3. CAMPOS DE FORMULÁRIO E FILTROS (Foco suave):
+ *    input, select, textarea {
+ *      transition: border-color var(--transition-duration-fast) var(--ease-standard),
+ *                  box-shadow var(--transition-duration-fast) var(--ease-standard);
+ *    }
+ *    input:focus, select:focus, textarea:focus {
+ *      border-color: var(--border-focus);
+ *      outline: none;
+ *      box-shadow: 0 0 0 3px rgba(21, 171, 55, 0.2);
+ *    }
+ *
+ * 4. SPINNER DE CARREGAMENTO:
+ *    @keyframes spin {
+ *      from { transform: rotate(0deg); }
+ *      to { transform: rotate(360deg); }
+ *    }
+ *    .spinner {
+ *      animation: spin 800ms linear infinite;
+ *    }
+ *
+ * 5. SKELETON LOADER (Efeito de pulso durante o carregamento):
+ *    @keyframes pulse {
+ *      0%, 100% { opacity: 1; }
+ *      50% { opacity: 0.45; }
+ *    }
+ *    .skeleton {
+ *      animation: pulse 1.5s ease-in-out infinite;
+ *    }
+ *
+ * 6. MODAL DE CONFIRMAÇÃO (Entrada suave com scale):
+ *    @keyframes modalEnter {
+ *      from {
+ *        opacity: 0;
+ *        transform: var(--transform-modal-initial);
+ *      }
+ *      to {
+ *        opacity: 1;
+ *        transform: var(--transform-modal-active);
+ *      }
+ *    }
+ *    .modal-content {
+ *      animation: modalEnter var(--transition-duration-slow) var(--ease-out) forwards;
+ *    }
+ * ==============================================================================
+ */
 
 * {
     box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
 }
 
 body {

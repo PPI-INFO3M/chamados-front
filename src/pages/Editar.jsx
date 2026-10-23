@@ -1,6 +1,6 @@
 import Formulario from "../components/Formulario"
 import { useState, useEffect } from "react";
-import { listarTipos, listarLocais, listarPrioridades, buscarChamado } from "../services/chamadosService"
+import { buscarChamado } from "../services/chamadosService"
 
 import { useParams } from "react-router-dom";
 
@@ -12,10 +12,6 @@ function Editar(props) {
     const [prioridade, setPrioridade] = useState("");
     const [dataAbertura, setDataAbertura] = useState("")
     const [status, setStatus] = useState("")
-
-    const [tipos, setTipos] = useState([]);
-    const [locais, setLocais] = useState([]);
-    const [prioridades, setPrioridades] = useState([]);
 
     const { id } = useParams()
 
@@ -39,13 +35,8 @@ function Editar(props) {
             setMensagem(erro)
             setSucesso(false)
         } else {
-            setMensagem("Chamado cadastrado com sucesso!")
+            setMensagem("Chamado atualizado com sucesso!")
             setSucesso(true)
-            setTitulo("")
-            setDescricao("")
-            setTipo("")
-            setLocal("")
-            setPrioridade("")
         }
     };
 
@@ -71,19 +62,20 @@ function Editar(props) {
         return <p>Chamados resolvidos não podem ser editados...</p>
     }
     return (
-        <div>
+        <div className="page">
             <h2>Editar Chamado</h2>
-            <p>Chamado: {}</p>
-            <Formulario aoEnviar={aoEnviar}
+            <p>Chamado: {titulo} - {id}</p>
+            <Formulario 
+                aoEnviar={aoEnviar}
                 titulo={titulo} setTitulo={setTitulo}
                 descricao={descricao} setDescricao={setDescricao}
                 tipo={tipo} setTipo={setTipo}
                 local={local} setLocal={setLocal}
                 prioridade={prioridade} setPrioridade={setPrioridade}
-                dataAbertura={dataAbertura}
-                tipos={tipos} setTipos={setTipos}
-                locais={locais} setLocais={setLocais}
-                prioridades={prioridades} setPrioridades={setPrioridades}  
+                dataAbertura={dataAbertura} 
+                tipos={props.tipos}
+                locais={props.locais}
+                prioridades={props.prioridades}
                 mensagem={mensagem}
                 sucesso={sucesso}   
             />

@@ -124,6 +124,7 @@ function App() {
   async function aoIniciar(id, responsavel) {
     try {
       await iniciarChamado(id, responsavel);
+      await carregarChamado(id);
       await carregarChamados();
     } catch(e) {
       setErro(pegarMensagemErro(e))
@@ -133,6 +134,7 @@ function App() {
   async function aoResolver(id, solucao) {
     try {
       await resolverChamado(id, solucao);
+      await carregarChamado(id);
       await carregarChamados();
     } catch(e) {
       setErro(pegarMensagemErro(e));
@@ -170,7 +172,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className="app">
       <Cabecalho user={usuario} />
       <MensagemErro mensagem={erro} />
       <Routes>
@@ -208,6 +210,9 @@ function App() {
         <Route path="/editar/:id" element={
           <Editar 
             aoEditar={aoEditar}
+            tipos={tipos}
+            locais={locais}
+            prioridades={prioridades}
           />} />
       </Routes>
 

@@ -1,0 +1,188 @@
+body {
+    background-color: var(--bg-canvas);
+    font-family: var(--font-family-base);
+    color: var(--text-primary);
+}
+
+
+/* ==== CardChamado ==== */
+
+.tag {
+    font-size: var(--font-size-xs);
+    border-radius: var(--radius-xs);
+    padding: 2px 12px;
+    font-weight: var(--font-weight-semibold);
+}
+
+.status-aberto {
+    background-color: var(--status-aberto-bg);
+    color: var(--status-aberto-text);
+    border: 2px solid var(--status-aberto-border);
+}
+
+.status-em-andamento {
+    background-color: var(--status-andamento-bg);
+    color: var(--status-andamento-text);
+    border: 2px solid var(--status-andamento-border);
+}
+
+.status-resolvido {
+    background-color: var(--status-resolvido-bg);
+    color: var(--status-resolvido-text);
+    border: 2px solid var(--status-resolvido-border);
+}
+
+.prioridade-alta {
+    background-color: var(--priority-alta-bg);
+    color: var(--priority-alta-color);
+    border: 2px solid var(--priority-alta-border);
+}
+
+.prioridade-média {
+    background-color: var(--priority-media-bg);
+    color: var(--priority-media-color);
+    border: 2px solid var(--priority-media-border);
+}
+
+.prioridade-baixa {
+    background-color: var(--priority-baixa-bg);
+    color: var(--priority-baixa-color);
+    border: 2px solid var(--priority-baixa-border);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    width: 49%;
+    gap: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+    z-index: var(--z-card);
+    transition: var(--transition-card);
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: var(--transform-hover-lift);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ctn-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.ctn-local {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.ctn-local .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+input, select, textarea {
+transition: border-color var(--transition-duration-fast) var(--ease-standard),
+            box-shadow var(--transition-duration-fast) var(--ease-standard);
+}
+input:focus, select:focus, textarea:focus {
+border-color: var(--border-focus);
+outline: none;
+box-shadow: 0 0 0 3px rgba(21, 171, 55, 0.2);
+}
+
+.card h3 {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+}
+
+.descr {
+    font-weight: var(--font-weight-regular);
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.card-top p {
+    font-size: var(--font-size-xs);
+}
+
+
+/* ==== FOMULARIOS ==== */
+
+.campo-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+ input {
+    height: 40px;
+    background-color: var(--bg-input);
+    color: var(--text-muted);
+    border: 2px solid var(--border-default);
+    outline: none;
+    border-radius: var(--radius-sm);
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    height: 40px;
+    background-color: var(--bg-input);
+    color: var(--text-muted);
+    border: 2px solid var(--border-default);
+    outline: none;
+    border-radius: var(--radius-sm);
+}
+
+form a {
+    font-weight: var(--font-weight-semibold);
+    padding: 6px var(--space-3);
+    border-radius: var(--radius-sm);
+}
+
+form a {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 2px solid var(--border-default);
+}
+
+.buttons {
+    display: flex;
+    gap: 16px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.btn {
+    font-weight: var(--font-weight-semibold);
+    padding: 6px var(--space-3);
+    border-radius: var(--radius-sm);
+}

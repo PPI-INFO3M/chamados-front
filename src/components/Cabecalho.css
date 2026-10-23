@@ -1,7 +1,30 @@
 .cabecalho {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--color-brand-primary);
+  height: var(--header-height);
+  padding: 12px;
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-header);
+}
+
+.cabecalho:hover {
+  transform: var(--transform-hover-lift);
+}
+
+
+.menu {
+  display: flex;
+  gap: 40px;
+}
+
+img {
+  height: 40px;
 }
 
 .menu-user {
@@ -16,7 +39,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  min-width: 200px;
+  min-width: 240px;
   background-color: var(--bg-input);
   font-size: var(--font-size-sm);
   color: var(--text-primary);
@@ -27,10 +50,28 @@
   z-index: 10;
 }
 
+.menu-user-lista p:hover {
+  border-left: 3px solid var(--border-focus);
+  transition: var(--transition-duration-fast);
+  background-color: var(--bg-surface);
+}
+
 .menu-user:hover .menu-user-lista {
   display: block;
 }
 
 .menu-user-lista p:hover {
     color: var(--color-brand-primary-hover);
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+}
+
+a {
+  color: var(--text-inverse);
+}
+
+a:hover {
+  font-weight: 600;
 }

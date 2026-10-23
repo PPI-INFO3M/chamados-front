@@ -1,6 +1,7 @@
 import Formulario from "../components/Formulario"
 import { useState, useEffect } from "react";
 import { listarTipos, listarLocais, listarPrioridades } from "../services/chamadosService"
+import "./pages.css"
 
 function Cadastro(props) {
     const [titulo, setTitulo] = useState("")
@@ -58,7 +59,7 @@ function Cadastro(props) {
     }, []);
 
     return (
-        <div>
+        <div className="page">
             <h2>Cadastrar Chamado</h2>
             <Formulario aoEnviar={aoEnviar}
                 titulo={titulo} setTitulo={setTitulo}

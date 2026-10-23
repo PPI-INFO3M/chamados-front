@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Cabecalho.css"
+import logo from "../assets/logo.png"
 
 function Cabecalho(props) {
     return (
         <header className="cabecalho">
             <div className="cab-left">
-                <h1>Chamados de manuntenção</h1>
+                <img src={logo} alt="" />
             </div>
 
             <nav className="menu">

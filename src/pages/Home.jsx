@@ -1,5 +1,6 @@
 import ListaChamados from "../components/ListaChamados"
 import { Link } from "react-router-dom"
+import "./pages.css"
 
 function Home(props) {
 
@@ -7,7 +8,7 @@ function Home(props) {
         <div className="page-home">
             <div className="ctn-top">
                 <h2>Chamados</h2>
-                <Link to="/novo">+ Abrir chamado</Link>
+                <Link to="/novo" className="btn-seguir">+ Abrir chamado</Link>
             </div>
             <div className="ctn-busca">
                 <input 
@@ -34,7 +35,7 @@ function Home(props) {
                     onChange={(e) => {
                         props.setStatus(e.target.value)
                     }}>
-                        <option value="Status" key="status">Status</option>
+                        <option value="" key="status">Status</option>
                         <option value="aberto" key="aberto">aberto</option>
                         <option key="em-andamento" value="em andamento">em andamento</option>
                         <option key="" value="resolvido">resolvido</option>

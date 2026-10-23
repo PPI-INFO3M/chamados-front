@@ -5,8 +5,8 @@ function Formulario(props) {
 
     return (
         <form className="forms" onSubmit={props.aoEnviar}>
-            <CampoTexto rotulo="Titulo" type={props.titulo} value={props.setTitulo} aoAlterar={props.setTitulo} />
-            <CampoTexto rotulo="Descrição" type={props.descricao} value={props.setDescricao} aoAlterar={props.setDescricao} />
+            <CampoTexto rotulo="Titulo" valor={props.titulo} aoAlterar={props.setTitulo} />
+            <CampoTexto rotulo="Descrição" valor={props.descricao} aoAlterar={props.setDescricao} />
             <div className="select">
                 <label>Tipo</label>
                 <select
@@ -54,8 +54,10 @@ function Formulario(props) {
                     {props.mensagem}
                 </p>
             )}
-            <button type="submit">Salvar</button>
-            <Link to="/">Cancelar</Link>
+            <div className="buttons">
+                <button type="submit" className="btn-seguir">Salvar</button>
+                <Link to="/">Cancelar</Link>
+            </div>
         </form>
     )
 }
