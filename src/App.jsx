@@ -9,7 +9,9 @@ import Cabecalho from "./components/Cabecalho"
 import MensagemErro from './components/MensagemErro'
 import './App.css'
 
-import { listarChamados, listarTipos, listarLocais, listarPrioridades, buscarChamado, criarChamado, editarChamado, excluirChamado, iniciarChamado, resolverChamado } from './services/chamadosService'
+import { buscarUsuario, listarChamados, listarTipos, listarLocais, listarPrioridades, buscarChamado, criarChamado, editarChamado, excluirChamado, iniciarChamado, resolverChamado } from './services/chamadosService'
+
+
 
 function App() {
   const [usuario, setUsuario] = useState("");
@@ -36,8 +38,7 @@ function App() {
 
   async function carregarUsuario() {
     try {
-      const resposta = await api.get("/eu")
-      setUsuario(resposta.data)
+      setUsuario(await buscarUsuario())
     } catch (e) {
       setErro(pegarMensagemErro(e))
     }

@@ -5,7 +5,7 @@ function CardChamado(props) {
         <div className="card">
             <div className="card-top">
                 <span className={"tag status-" + props.chamado.status.replace(" ", "-")}>
-                    {props.chamado.status}
+                    ● {props.chamado.status}
                 </span>
                 <p>{props.chamado.data_abertura}</p>
             </div>
